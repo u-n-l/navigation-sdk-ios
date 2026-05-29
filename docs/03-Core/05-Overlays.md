@@ -258,7 +258,7 @@ if service.isOverlayOfflineDataGrabberSupported(safetyId) {
 
 ### Safety overlay[​](#safety-overlay "Direct link to Safety overlay")
 
-![Speed limit and red light control overlay items](/docs/assets/images/ios_core_overlaysafety-ab8bb3ab09dcd890b01dfca42814de59.png "Speed limit and red light control overlay items")
+![Speed limit and red light control overlay items](../assets/images/ios_core_overlaysafety-ab8bb3ab09dcd890b01dfca42814de59.png "Speed limit and red light control overlay items")
 
 **Speed limit and red light control overlay items**
 
@@ -285,7 +285,7 @@ if let unit = item.search(inPreviewDataSafetyCameraParameterType: .speedUnit) {
 
 ### Social reports overlay[​](#social-reports-overlay "Direct link to Social reports overlay")
 
-![Fixed Camera social report overlay item](/docs/assets/images/ios_core_overlaysocial-344b1fdf3dad08fcdfdc9786a946230f.png "Fixed Camera social report overlay item")
+![Fixed Camera social report overlay item](../assets/images/ios_core_overlaysocial-344b1fdf3dad08fcdfdc9786a946230f.png "Fixed Camera social report overlay item")
 
 **Fixed Camera social report overlay item**
 
@@ -307,7 +307,7 @@ and other more advanced parameters.
 
 ### Public transport overlay[​](#public-transport-overlay "Direct link to Public transport overlay")
 
-![Public transport overlay item](/docs/assets/images/ios_core_overlaypublictransport-486b7d7676e2ca955b208a759e2dab9c.png "Public transport overlay item")
+![Public transport overlay item](../assets/images/ios_core_overlaypublictransport-486b7d7676e2ca955b208a759e2dab9c.png "Public transport overlay item")
 
 **Bus Public transport overlay item**
 

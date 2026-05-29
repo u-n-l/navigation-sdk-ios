@@ -230,7 +230,7 @@ if instruction.hasLaneInfo() {
 
 ```
 
-![Example of lane guidance image](/docs/assets/images/ios_core_lanes-5dd44558ff5fa590b9dd0afe7d5a9c79.png "Example of lane guidance image")
+![Example of lane guidance image](../assets/images/ios_core_lanes-5dd44558ff5fa590b9dd0afe7d5a9c79.png "Example of lane guidance image")
 
 **Example of lane guidance image**
 

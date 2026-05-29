@@ -77,15 +77,15 @@ Each part is interpreted according to the `MarkerCollectionObject` type that ren
 * **Polyline collection**: each part is a polyline
 * **Polygon/area collection**: each part is a polygon
 
-![Point Markers](/docs/assets/images/ios_core_markers1-7f1c50dd4738b7e1f306c287cff3630a.png "Point Markers")
+![Point Markers](../assets/images/ios_core_markers1-7f1c50dd4738b7e1f306c287cff3630a.png "Point Markers")
 
 **Point Markers**
 
-![Line Markers](/docs/assets/images/ios_core_markers2-42ec431370779e1398f7651a688eb74d.png "Line Markers")
+![Line Markers](../assets/images/ios_core_markers2-42ec431370779e1398f7651a688eb74d.png "Line Markers")
 
 **Line Markers**
 
-![Polygon Markers](/docs/assets/images/ios_core_markers3-4c047cd50ca6c4bd0cc5e9fd73ed7ffa.png "Polygon Markers")
+![Polygon Markers](../assets/images/ios_core_markers3-4c047cd50ca6c4bd0cc5e9fd73ed7ffa.png "Polygon Markers")
 
 **Polygon Markers**
 

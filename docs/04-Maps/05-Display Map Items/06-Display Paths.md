@@ -4,7 +4,7 @@ Learn how to render `PathObject` instances on the map using `PathCollectionObjec
 
 ## Add paths to the map[​](#add-paths-to-the-map "Direct link to Add paths to the map")
 
-Display [Path](/docs/03-Core/01-Base%20Entities.md#path) objects by adding them to the map path collection available from `MapViewPreferencesContext`.
+Display [Path](../../03-Core/01-Base%20Entities.md#path) objects by adding them to the map path collection available from `MapViewPreferencesContext`.
 
 `PathCollectionObject` is an iterable collection with utility methods such as `size`, `add`, `remove`, `removeAt`, `getPathAt`, and `getPathByName`.
 
@@ -28,7 +28,7 @@ _ = paths.add(
 
 ```
 
-![Simple example path from coordinates](/docs/assets/images/ios_maps_paths-8133ef9a410d29359dde16076854c644.png "Simple example path from coordinates")
+![Simple example path from coordinates](../../assets/images/ios_maps_paths-8133ef9a410d29359dde16076854c644.png "Simple example path from coordinates")
 
 **Simple example path from coordinates**
 

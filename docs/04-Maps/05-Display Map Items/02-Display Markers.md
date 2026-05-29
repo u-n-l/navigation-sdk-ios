@@ -39,11 +39,11 @@ marker.add(
 
 ```
 
-![Polyline Markers with One Part](/docs/assets/images/ios_maps_markers1-42ec431370779e1398f7651a688eb74d.png "Polyline Markers with One Part")
+![Polyline Markers with One Part](../../assets/images/ios_maps_markers1-42ec431370779e1398f7651a688eb74d.png "Polyline Markers with One Part")
 
 **Polyline Markers with one part**
 
-![Polyline Markers with Separate Parts](/docs/assets/images/ios_maps_markers2-8553cdd5c0105571f56e8e5194f67b15.png "Polyline Markers with Separate Parts")
+![Polyline Markers with Separate Parts](../../assets/images/ios_maps_markers2-8553cdd5c0105571f56e8e5194f67b15.png "Polyline Markers with Separate Parts")
 
 **Polyline Markers with coordinates added to separate parts**
 
@@ -65,7 +65,7 @@ mapViewController.addMarker(collection)
 
 ```
 
-![Point Markers](/docs/assets/images/ios_maps_markers3-7f1c50dd4738b7e1f306c287cff3630a.png "Point Markers")
+![Point Markers](../../assets/images/ios_maps_markers3-7f1c50dd4738b7e1f306c287cff3630a.png "Point Markers")
 
 **Point Markers**
 
@@ -115,7 +115,7 @@ mapViewController.addMarker(lines)
 
 ```
 
-![Rendering Markers as a Polygon](/docs/assets/images/ios_maps_markers4-bd741b393036724a9994db080ada0fdb.png "Rendering Markers as a Polygon")
+![Rendering Markers as a Polygon](../../assets/images/ios_maps_markers4-bd741b393036724a9994db080ada0fdb.png "Rendering Markers as a Polygon")
 
 **Rendering Markers as a Polygon**
 

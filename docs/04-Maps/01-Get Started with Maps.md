@@ -89,7 +89,7 @@ struct MapHostView: View {
 
 ```
 
-![Default Map View](/docs/assets/images/ios_maps_displaymap-ecc0b905fdc88d7f1ba641205ac8a8af.png "Default Map View")
+![Default Map View](../assets/images/ios_maps_displaymap-ecc0b905fdc88d7f1ba641205ac8a8af.png "Default Map View")
 
 **Default Map View**
 

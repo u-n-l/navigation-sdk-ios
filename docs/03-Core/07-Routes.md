@@ -355,11 +355,11 @@ turnDetailsObject.getTurnImage(imgSize,
 
 ```
 
-![](/docs/assets/images/turn_image_basic_colors.png "Turn Image with basic colors")
+![Turn image with basic colors](../assets/images/turn_image_basic_colors.png "Turn Image with basic colors")
 
 **Turn Image with basic colors**
 
-![](/docs/assets/images/turn_image_custom_colors.png "Turn Image with customized colors")
+![Turn image with customized colors](../assets/images/turn_image_custom_colors.png "Turn Image with customized colors")
 
 **Turn Image with customized colors**
 
@@ -367,7 +367,7 @@ turnDetailsObject.getTurnImage(imgSize,
 
 Signposts near roadways indicate intersections and directions. The SDK provides realistic image renderings with additional information.
 
-![Signpost image](/docs/assets/images/signpost_image-eeff2259d472a997f59b32830e683611.png "Signpost image captured during highway navigation")
+![Signpost image](../assets/images/signpost_image-eeff2259d472a997f59b32830e683611.png "Signpost image captured during highway navigation")
 
 **Signpost image captured during highway navigation**
 

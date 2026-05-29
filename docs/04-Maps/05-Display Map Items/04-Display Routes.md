@@ -18,7 +18,7 @@ mapViewController.setMainRoute(alternativeRoute)
 
 ```
 
-![Routes with default summary](/docs/assets/images/ios_maps_routes1-26892523a3a6b376113791640009495c.png "Routes with default summary")
+![Routes with default summary](../../assets/images/ios_maps_routes1-26892523a3a6b376113791640009495c.png "Routes with default summary")
 
 **Presenting routes through MapViewController with default summary**
 
@@ -43,7 +43,7 @@ mapViewController.center(onRoutes: [mainRoute, alternativeRoute], displayMode: .
 
 ```
 
-![Routes with custom labels](/docs/assets/images/ios_maps_routes2-fa40611fff7f01f1153be376e7969c3a.png "Routes with custom labels")
+![Routes with custom labels](../../assets/images/ios_maps_routes2-fa40611fff7f01f1153be376e7969c3a.png "Routes with custom labels")
 
 **Presenting routes through MapViewPreferencesContext with custom labels**
 
@@ -74,7 +74,7 @@ preferences.setRenderSettings(settings, route: mainRoute)
 
 All route dimensional values in `MapViewRouteRenderSettings` are measured in millimeters.
 
-![Route with Render settings](/docs/assets/images/ios_maps_routes3-6e97fa8b4737f5c218065b81fdcf4e99.png "Route with Render settings")
+![Route with Render settings](../../assets/images/ios_maps_routes3-6e97fa8b4737f5c218065b81fdcf4e99.png "Route with Render settings")
 
 **Customizing route rendering with MapViewRouteRenderSettings**
 
@@ -98,7 +98,7 @@ preferences.hideRouteLabel(mainRoute)
 
 ```
 
-![Setting a custom label with an image](/docs/assets/images/ios_maps_routes4-ad061b252433c59dc9d76609e8942177.png "Setting a custom label with an image")
+![Setting a custom label with an image](../../assets/images/ios_maps_routes4-ad061b252433c59dc9d76609e8942177.png "Setting a custom label with an image")
 
 **Setting a custom label with an image**
 

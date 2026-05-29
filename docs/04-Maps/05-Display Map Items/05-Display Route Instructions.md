@@ -4,7 +4,7 @@ Learn how to focus the map on route instructions and show maneuver arrows during
 
 ## Center on route instructions[​](#center-on-route-instructions "Direct link to Center on route instructions")
 
-Get instructions from route segments, then center on the desired instruction. A simplified example is shown below. For more details on obtaining a route's instructions see the [Get the route segments and instructions](/docs/07-Routing/01-Get%20Started%20with%20Routing.md#retrieve-route-instructions)
+Get instructions from route segments, then center on the desired instruction. A simplified example is shown below. For more details on obtaining a route's instructions see the [Get the route segments and instructions](../../07-Routing/01-Get%20Started%20with%20Routing.md#retrieve-route-instructions)
 section.
 
 ```swift

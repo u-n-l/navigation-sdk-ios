@@ -46,7 +46,7 @@ if let stores = mapViewController.getPreferences().getLandmarkStoreCollection() 
 >
 > Initializing a `LandmarkStoreContext` will create a file inside the app's sandboxed file system if it doesn't already exist.
 
-![Displayed Custom Landmark](/docs/assets/images/ios_maps_customlandmark-929435e3b5a5a00c4fa7ad78579e509d.png "Displayed Custom Landmark")
+![Displayed Custom Landmark](../../assets/images/ios_maps_customlandmark-929435e3b5a5a00c4fa7ad78579e509d.png "Displayed Custom Landmark")
 
 **Displayed Custom Landmark**
 
