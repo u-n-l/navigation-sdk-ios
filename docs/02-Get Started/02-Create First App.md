@@ -27,7 +27,7 @@ Follow this tutorial to build an iOS app with an interactive map.
 
 > ⚠️ **WARNING**
 >
-> Complete the full [SDK integration steps](/docs/02-Get%20Started/01-Integrate%20SDK.md) if you haven't already.
+> Complete the full [SDK integration steps](../02-Get%20Started/01-Integrate%20SDK.md) if you haven't already.
 
 ## Step 3: Write the code[​](#step-3-write-the-code "Direct link to Step 3: Write the code")
 

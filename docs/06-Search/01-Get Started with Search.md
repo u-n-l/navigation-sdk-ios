@@ -139,7 +139,7 @@ searchContext.search(withQuery: "My Custom Landmark", location: location) { resu
 
 > 🚨 **DANGER**
 >
-> `LandmarkStoreContext(name:)` persists its data in the app sandbox. Reusing the same store name can reopen an existing store that already contains landmarks and categories. See the [Landmarks guide](/docs/03-Core/03-Landmarks.md#manage-landmark-stores) for details.
+> `LandmarkStoreContext(name:)` persists its data in the app sandbox. Reusing the same store name can reopen an existing store that already contains landmarks and categories. See the [Landmarks guide](../03-Core/03-Landmarks.md#manage-landmark-stores) for details.
 
 > 💡 **TIP**
 >
@@ -242,9 +242,9 @@ searchContext.search(withQuery: "cafe", location: referencePoint) { results in
 
 ## Show results on the map[​](#show-results-on-the-map "Direct link to Show results on the map")
 
-In most use cases, landmarks returned by a search are already rendered on the map as part of the loaded map data. If the search was performed on custom landmark stores, refer to the [display landmarks](/docs/04-Maps/05-Display%20Map%20Items/01-Display%20Landmarks.md#add-custom-landmarks) guide for adding them to the map view.
+In most use cases, landmarks returned by a search are already rendered on the map as part of the loaded map data. If the search was performed on custom landmark stores, refer to the [display landmarks](../04-Maps/05-Display%20Map%20Items/01-Display%20Landmarks.md#add-custom-landmarks) guide for adding them to the map view.
 
-To center the map on a landmark returned from search, retrieve its coordinates with `getCoordinates()` and pass them to `center(onCoordinates:zoomLevel:animationDuration:)` on your `MapViewController`. See the [adjust map view](/docs/04-Maps/02-Adjust%20Map%20View.md) guide for full centering options.
+To center the map on a landmark returned from search, retrieve its coordinates with `getCoordinates()` and pass them to `center(onCoordinates:zoomLevel:animationDuration:)` on your `MapViewController`. See the [adjust map view](../04-Maps/02-Adjust%20Map%20View.md) guide for full centering options.
 
 ```swift
 let searchContext = SearchContext()

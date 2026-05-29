@@ -30,7 +30,7 @@ let distanceInMeters = landmarkA.getCoordinates().getDistance(landmarkB.getCoord
 
 ```
 
-See the [Base entities](/docs/03-Core/01-Base%20Entities.md) guide for more on `CoordinatesObject`.
+See the [Base entities](../03-Core/01-Base%20Entities.md) guide for more on `CoordinatesObject`.
 
 ### Descriptive information[​](#descriptive-information "Direct link to Descriptive information")
 

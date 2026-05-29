@@ -324,11 +324,11 @@ This overlay displays public transport stations. Two types of public transport s
 
 ### Select overlay items[​](#select-overlay-items "Direct link to Select overlay items")
 
-Overlay items are selectable. Identify specific items when users tap or long-press the map using `getCursorSelectionOverlayItems()` on `MapViewController` or using the dedicated overlay selection delegate methods. See the [Interact with map](/docs/04-Maps/03-Interact%20with%20Map.md#select-map-elements) guide for details.
+Overlay items are selectable. Identify specific items when users tap or long-press the map using `getCursorSelectionOverlayItems()` on `MapViewController` or using the dedicated overlay selection delegate methods. See the [Interact with map](../04-Maps/03-Interact%20with%20Map.md#select-map-elements) guide for details.
 
 ### Search overlay items[​](#search-overlay-items "Direct link to Search overlay items")
 
-Overlays are searchable. Set the appropriate properties in `SearchPreferencesObject` when performing a search. See the [Get started with Search](/docs/06-Search/01-Get%20Started%20with%20Search.md) guide for details.
+Overlays are searchable. Set the appropriate properties in `SearchPreferencesObject` when performing a search. See the [Get started with Search](../06-Search/01-Get%20Started%20with%20Search.md) guide for details.
 
 ### Calculate routes[​](#calculate-routes "Direct link to Calculate routes")
 
@@ -358,8 +358,8 @@ Use `getPreviewUrl()` to open a URL in a web browser for more details about the 
 
 ### Proximity alarms[​](#proximity-alarms "Direct link to Proximity alarms")
 
-Configure alarms to notify users when approaching specific overlay items. See the [Landmarks and overlay alarms](/docs/10-Alarms/03-Landmark%20and%20Overlay%20Alarms.md) guide for implementation details.
+Configure alarms to notify users when approaching specific overlay items. See the [Landmarks and overlay alarms](../10-Alarms/03-Landmark%20and%20Overlay%20Alarms.md) guide for implementation details.
 
 ### Download overlay data[​](#download-overlay-data "Direct link to Download overlay data")
 
-Some overlays can be downloaded for offline use. See the [Offline](/docs/09-Offline/02-Manage%20Content.md#download-content) section for more details.
+Some overlays can be downloaded for offline use. See the [Offline](../09-Offline/02-Manage%20Content.md#download-content) section for more details.

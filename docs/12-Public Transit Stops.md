@@ -110,7 +110,7 @@ Route info is embedded within stop and trip dictionaries. Use `PublicTransportRo
 >
 > Route info embedded in stop and trip dictionaries provides information about public transit routes available at a specific stop. `PTRouteObject` represents a computed public transit route between multiple waypoints.
 >
-> See [Compute Public Transit Routes](/docs/07-Routing/03-Advanced%20Features.md#compute-public-transit-routes) for computing routes.
+> See [Compute Public Transit Routes](./07-Routing/03-Advanced%20Features.md#compute-public-transit-routes) for computing routes.
 
 ### Route transport types[​](#route-transport-types "Direct link to Route transport types")
 

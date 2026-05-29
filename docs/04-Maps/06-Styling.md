@@ -72,11 +72,11 @@ if let path = Bundle.main.path(forResource: "CustomMapStyle", ofType: "style") {
 
 ```
 
-![Default Map Style](/docs/assets/images/playmap-ecc0b905fdc88d7f1ba641205ac8a8af.png "Default Map Style")
+![Default Map Style](../assets/images/playmap-ecc0b905fdc88d7f1ba641205ac8a8af.png "Default Map Style")
 
 **Default Map Style**
 
-![Custom Map Style](/docs/assets/images/ios_maps_customstyle-89ba891acfa5be1f0b1f30745f934887.png "Custom Map Style")
+![Custom Map Style](../assets/images/ios_maps_customstyle-89ba891acfa5be1f0b1f30745f934887.png "Custom Map Style")
 
 **Custom Map Style**
 

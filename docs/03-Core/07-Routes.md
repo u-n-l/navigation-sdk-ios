@@ -12,11 +12,11 @@ Navigable routes consist of segments. Each segment represents the portion betwee
 
 ## Create Routes[​](#create-routes "Direct link to Create Routes")
 
-Routes cannot be instantiated directly. Compute them based on a list of landmarks. See [Get started with Routing](/docs/ios/guides/routing/get-started-routing.md) for details.
+Routes cannot be instantiated directly. Compute them based on a list of landmarks. See [Get started with Routing](../07-Routing/01-Get%20Started%20with%20Routing.md) for details.
 
 > 🚨 **DANGER**
 >
-> Calculating a route does not automatically display it on the map. See [Display routes](/docs/ios/guides/maps/display-map-items/display-routes.md) for instructions.
+> Calculating a route does not automatically display it on the map. See [Display routes](../04-Maps/05-Display%20Map%20Items/04-Display%20Routes.md) for instructions.
 
 ## Route types[​](#route-types "Direct link to Route types")
 

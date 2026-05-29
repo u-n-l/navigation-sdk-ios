@@ -101,7 +101,7 @@ func getVoices() {
 
 > 💡 **TIP**
 >
-> See the [Manage Content Guide](/docs/09-Offline/02-Manage%20Content.md) for downloading, deleting, and managing voices.
+> See the [Manage Content Guide](../09-Offline/02-Manage%20Content.md) for downloading, deleting, and managing voices.
 
 ### Activate a human voice[​](#activate-a-human-voice "Direct link to Activate a human voice")
 

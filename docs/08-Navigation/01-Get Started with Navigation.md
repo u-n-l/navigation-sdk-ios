@@ -32,8 +32,8 @@ The SDK offers two navigation methods:
 
 Navigation mode uses the SDK's position service with:
 
-* **Real GPS Data** - Requires location permissions on iOS. See [Get started with positioning](/docs/05-Positioning%20&%20Sensors/02-Get%20Started%20with%20Positioning.md)
-* **Custom Position Data** - Configure a custom data source for position updates. No permissions required. See [Custom positioning](/docs/05-Positioning%20&%20Sensors/04-Custom%20Positioning.md)
+* **Real GPS Data** - Requires location permissions on iOS. See [Get started with positioning](../05-Positioning%20&%20Sensors/02-Get%20Started%20with%20Positioning.md)
+* **Custom Position Data** - Configure a custom data source for position updates. No permissions required. See [Custom positioning](../05-Positioning%20&%20Sensors/04-Custom%20Positioning.md)
 
 > ⚠️ **WARNING**
 >
@@ -119,11 +119,11 @@ The `NavigationContextDelegate` delivers the following navigation events:
 | `navigationContext(_:route:navigationDestinationReached:)`                              | Called upon reaching the final destination, with information about the destination landmark.                                                                           |
 | `navigationContext(_:navigationRouteUpdated:)`                                          | Fired when the current route is updated, providing the new route details.                                                                                              |
 | `navigationContext(_:route:navigationError:)`                                           | Called when a navigation error occurs. See error codes below.                                                                                                          |
-| `navigationContext(_:onBetterRouteDetected:branchingCoords:travelTime:delay:timeGain:)` | Triggered when a better alternative route is detected. See the [Better route detection guide](/docs/ios/guides/navigation/better-route-detection.md) for more details. |
+| `navigationContext(_:onBetterRouteDetected:branchingCoords:travelTime:delay:timeGain:)` | Triggered when a better alternative route is detected. See the [Better route detection guide](../08-Navigation/03-Better%20Route%20Detection.md) for more details. |
 | `navigationContext(_:onBetterRouteInvalidated:)`                                        | Indicates that a previously suggested better route is no longer valid.                                                                                                 |
 | `navigationContext(_:onSkipNextIntermediateDestinationDetected:)`                       | Indicates the user is moving away from the next intermediate waypoint. Consider calling `skipNextIntermediateDestination()` on the navigation context.                 |
 | `navigationContext(_:canPlayNavigationSoundForRoute:)`                                  | Returns whether the SDK is allowed to play a navigation sound. Return `true` to allow built-in audio playback.                                                         |
-| `navigationContext(_:route:navigationSound:)`                                           | Provides a `SoundObject` when a sound needs to be played. See [Add voice guidance](/docs/ios/guides/navigation/voice-guidance.md).                                     |
+| `navigationContext(_:route:navigationSound:)`                                           | Provides a `SoundObject` when a sound needs to be played. See [Add voice guidance](../08-Navigation/02-Add%20Voice%20Guidance.md).                                     |
 
 **`NavigationStatus` values:**
 
@@ -144,9 +144,9 @@ The `NavigationContextDelegate` delivers the following navigation events:
 
 > 💡 **TIP**
 >
-> Present the route and start following position inside the navigation/simulation completion handler to ensure the map updates only after the session has started successfully. See [Show your location on the map](/docs/05-Positioning%20&%20Sensors/03-Show%20Location%20on%20Map.md) for camera customization options.
+> Present the route and start following position inside the navigation/simulation completion handler to ensure the map updates only after the session has started successfully. See [Show your location on the map](../05-Positioning%20&%20Sensors/03-Show%20Location%20on%20Map.md) for camera customization options.
 
-Display the route on the map for better navigation clarity. Turn-by-turn navigation arrows disappear once passed. Learn more in [Display routes](/docs/04-Maps/05-Display%20Map%20Items/04-Display%20Routes.md).
+Display the route on the map for better navigation clarity. Turn-by-turn navigation arrows disappear once passed. Learn more in [Display routes](../04-Maps/05-Display%20Map%20Items/04-Display%20Routes.md).
 
 The traveled portion of the route changes color using the `traveledInnerColor` parameter of `RouteRenderSettings`.
 
@@ -242,5 +242,5 @@ navigationContext?.cancelSimulateRoute()
 
 ## Run navigation in background[​](#run-navigation-in-background "Direct link to Run navigation in background")
 
-To use navigation while your app is in the background, additional setup is required. See the [Background location guide](/docs/ios/guides/positioning/background-location.md) for configuration instructions.
+To use navigation while your app is in the background, additional setup is required. See the [Background location guide](../05-Positioning%20&%20Sensors/07-Background%20Location.md) for configuration instructions.
 

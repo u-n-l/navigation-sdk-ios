@@ -4,7 +4,7 @@ The UNL Navigation SDK for iOS lets you control viewport framing, camera orienta
 
 > 📝 **INFO**
 >
-> Most code snippets in this guide use UIKit syntax, but the same APIs are available in SwiftUI via the `proxy.mapViewController` provided by `MapReader`. Some are also available via modifiers or `MapBase` initializers for quick view updates, as seen in [Get started with maps](/docs//04-Maps/01-Get%20Started%20with%20Maps.md).
+> Most code snippets in this guide use UIKit syntax, but the same APIs are available in SwiftUI via the `proxy.mapViewController` provided by `MapReader`. Some are also available via modifiers or `MapBase` initializers for quick view updates, as seen in [Get started with maps](../04-Maps/01-Get%20Started%20with%20Maps.md).
 
 ## Get viewport metrics[​](#get-viewport-metrics "Direct link to Get viewport metrics")
 

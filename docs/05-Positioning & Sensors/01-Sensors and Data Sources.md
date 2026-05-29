@@ -26,7 +26,7 @@ Use these APIs when you need to read device sensor data, replay recorded logs, s
 | `DataType.mountInformation` | Device mount/orientation metadata, useful for camera and in-vehicle scenarios. |
 | `DataType.unknown`          | Fallback value for unsupported or unclassified data.                           |
 
-For position structure details, see [Positions](/docs/03-Core/02-Positions.md).
+For position structure details, see [Positions](../03-Core/02-Positions.md).
 
 > 📝 **INFO**
 >

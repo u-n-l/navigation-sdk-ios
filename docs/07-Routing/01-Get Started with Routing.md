@@ -115,11 +115,11 @@ for event in trafficEvents {
 
 ```
 
-See the [Traffic Events guide](/docs/03-Core/09-Traffic%20Events.md) for detailed information.
+See the [Traffic Events guide](../03-Core/09-Traffic%20Events.md) for detailed information.
 
 ## Display routes on the map[​](#display-routes-on-the-map "Direct link to Display routes on the map")
 
-Routes are not automatically displayed after calculation. Refer to the [display routes](/docs/04-Maps/05-Display%20Map%20Items/04-Display%20Routes.md) guide for visualization and customization options.
+Routes are not automatically displayed after calculation. Refer to the [display routes](../04-Maps/05-Display%20Map%20Items/04-Display%20Routes.md) guide for visualization and customization options.
 
 ## Get the terrain profile[​](#get-the-terrain-profile "Direct link to Get the terrain profile")
 

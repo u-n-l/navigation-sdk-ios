@@ -58,7 +58,7 @@ Set video quality with one of the `ResolutionFormat` values (for example `Resolu
 >
 > If the recording duration is shorter than the configured `setMinDurationSeconds(_:)`, the `stopRecording()` method does not save the recording and returns `SDKErrorCodeRecordedLogTooShort`.
 >
-> The `SDKErrorCodeRecordedLogTooShort` error may also occur if an insufficient number of positions were emitted, even when the duration between `startRecording()` and `stopRecording()` exceeds `setMinDurationSeconds(_:)`. To test recording functionality, create a custom external `DataSourceContext` and push custom positions. Refer to the [custom positioning guide](/docs/ios/guides/positioning/custom-positioning.md) for details.
+> The `SDKErrorCodeRecordedLogTooShort` error may also occur if an insufficient number of positions were emitted, even when the duration between `startRecording()` and `stopRecording()` exceeds `setMinDurationSeconds(_:)`. To test recording functionality, create a custom external `DataSourceContext` and push custom positions. Refer to the [custom positioning guide](../05-Positioning%20&%20Sensors/04-Custom%20Positioning.md) for details.
 >
 > The `SDKErrorCodeKGeneral` result might be returned if the application has been sent to the background without the required configuration. See the Recording lifecycle section below for information about proper recording management.
 >
