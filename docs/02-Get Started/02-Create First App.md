@@ -5,7 +5,16 @@ Follow this tutorial to build an iOS app with an interactive map.
 > 📝 **INFO** What you need
 >
 >* Xcode installed
+>* iOS 17.0 or higher
 >* Service key from UNL - via UNL Platform
+
+> 📝 **INFO** Simulator vs Physical device
+>* **Simulator** - Usually works with Embed and Sign only
+>* **Physical iPhone / TestFlight / App Store** - Complete Step 2b below {TODO - add link}.
+>
+> ⚠️ **WARNING**
+>
+> Do not copy separate shell scripts into your app repo.
 
 ## Step 1: Create a new project[​](#step-1-create-a-new-project "Direct link to Step 1: Create a new project")
 
@@ -21,9 +30,10 @@ Follow this tutorial to build an iOS app with an interactive map.
 
 ## Step 2: Install the SDK[​](#step-2-install-the-sdk "Direct link to Step 2: Install the SDK")
 
-1. In Xcode, go to **File > Swift Packages > Add Package Dependency**
-2. Paste the repository URL: **{TODO}**
-3. Select the latest stable version and click **Add Package**
+1. `UnlNavigationSdk` is distributed as a prebuilt `XCFramework`, **not** a Swift Package.
+2. Your UNL SDK package should contain one file:
+`UnlNavigationSdk-<Environment>.xcframework`
+    - The xcframework includes `unl_embed_fixup` at its root for device builds. **Do not** copy other UNL maintainer scripts into your app project.
 
 > ⚠️ **WARNING**
 >
@@ -44,34 +54,41 @@ Open `AppDelegate.swift` and add this to the code:
 // UIKit
 
 import UIKit
-import GEMKit
+import UnlNavigationSdk
 
 let projectApiToken = "YOUR_API_TOKEN_HERE"
 
-class MapExceptionsHandler: NSObject, GEMSdkExceptions {
-    func onSdkActivationDetails(_ reason: ActivationAboutToExpireType, remainingTime: Int) {
-        print("Activation expiring: \(remainingTime)s remaining")
-    }
-}
-
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    private let exceptionsHandler = MapExceptionsHandler()
+class AppDelegate: UIResponder, UIApplicationDelegate, UnlNavigationSdkDelegate {
 
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let parameters = GEMSdkParameters(exceptions: exceptionsHandler)
-        parameters.activationToken = projectApiToken
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        UnlNavigationSdkService.shared.delegate = self
 
-        GEMSdk.shared().initSdk(with: parameters) { error in
-            if error == .kNoError {
-                print("SDK initialized successfully")
-            } else {
-                print("SDK init failed: \(error.rawValue)")
+        Task {
+            let result = await UnlNavigationSdkService.shared.initialize(
+                token: projectApiToken,
+                language: Locale.current.identifier
+            )
+
+            if !result.isSuccess {
+                #if DEBUG
+                print("UnlNavigationSdk init failed: \(result)")
+                #endif
             }
         }
 
         return true
+    }
+
+    func sdkServiceAuthorizationKeyRejected(_ service: UnlNavigationSdkService) {
+        print("Authorization key rejected")
+    }
+
+    func sdkServiceAuthorizationKeyUpdated(_ service: UnlNavigationSdkService) {
+        print("Authorization key updated")
     }
 }
 
@@ -83,47 +100,65 @@ Then open `ViewController.swift` and replace everything with this:
 // UIKit
 
 import UIKit
-import GEMKit
+import UnlNavigationSdk
 
 class ViewController: UIViewController {
-    private var mapViewController: MapViewController?
+    private var mapController: UnlMapViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
 
-        let controller = MapViewController()
-        controller.view.backgroundColor = .systemBackground
-        mapViewController = controller
+        Task { @MainActor in
+            await showMapWhenReady()
+        }
+    }
 
-        addChild(controller)
-        view.addSubview(controller.view)
-        controller.didMove(toParent: self)
+    @MainActor
+    private func showMapWhenReady() async {
+        if !UnlNavigationSdkService.shared.isInitialized {
+            let result = await UnlNavigationSdkService.shared.initialize(token: projectApiToken)
+            guard result.isSuccess else {
+                print("Initialization failed: \(result)")
+                return
+            }
+        }
 
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        let map = UnlNavigationSdkService.shared.makeMapController(
+            configuration: UnlMapConfiguration(
+                initialCoordinate: UnlCoordinatesObject(latitude: 52.5200, longitude: 13.4050),
+                initialZoomLevel: 12,
+                showsCompass: true,
+                showsLogo: true,
+                startsRendering: true
+            )
+        )
+        mapController = map
+
+        addChild(map)
+        view.addSubview(map.view)
+        map.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            controller.view.topAnchor.constraint(equalTo: view.topAnchor),
-            controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            controller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            controller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            map.view.topAnchor.constraint(equalTo: view.topAnchor),
+            map.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            map.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            map.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+        map.didMove(toParent: self)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        mapViewController?.startRender()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        mapViewController?.stopRender()
-    }
-
-    deinit {
-        mapViewController?.destroy()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        guard isMovingFromParent || isBeingDismissed else { return }
+        mapController?.destroyMap()
+        mapController = nil
     }
 }
 
 ```
+> 📝 **NOTE:** 
+>
+> Do not call destroyMap() from deinit. It is MainActor-isolated; use viewDidDisappear when the screen is removed.
 
 Open `HelloMapApp.swift` (or your main App file) and replace everything with this:
 
@@ -131,36 +166,45 @@ Open `HelloMapApp.swift` (or your main App file) and replace everything with thi
 //SwiftUI
 
 import SwiftUI
-import GEMKit
+import UnlNavigationSdk
 
 let projectApiToken = "YOUR_API_TOKEN_HERE"
 
-class MapExceptionsHandler: NSObject, GEMSdkExceptions {
-    func onSdkActivationDetails(_ reason: ActivationAboutToExpireType, remainingTime: Int) {
-        print("Activation expiring: \(remainingTime)s remaining")
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    var window: UIWindow?
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        let screen = (scene as? UIWindowScene)?.screen ?? .main
+        UnlNavigationSdkService.shared.appDidBecomeActive(on: screen)
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        UnlNavigationSdkService.shared.appDidEnterBackground()
     }
 }
 
+
 @main
 struct HelloMapApp: App {
-    private let exceptionsHandler = MapExceptionsHandler()
+    @State private var isSDKReady = false
 
     init() {
-        let parameters = GEMSdkParameters(exceptions: exceptionsHandler)
-        parameters.activationToken = projectApiToken
-
-        GEMSdk.shared().initSdk(with: parameters) { error in
-            if error == .kNoError {
-                print("SDK initialized successfully")
-            } else {
-                print("SDK init failed: \(error.rawValue)")
+        Task {
+            let result = await UnlNavigationSdkService.shared.initialize(token: projectApiToken)
+            await MainActor.run {
+                isSDKReady = result.isSuccess
+                if !result.isSuccess {
+                    #if DEBUG
+                    print("UnlNavigationSdk init failed: \(result)")
+                    #endif
+                }
             }
         }
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(isSDKReady: isSDKReady)
         }
     }
 }
@@ -173,13 +217,24 @@ Then open `ContentView.swift` and replace everything with this:
 // SwiftUI
 
 import SwiftUI
-import GEMKit
+import UnlNavigationSdk
 
 struct ContentView: View {
+    let isSDKReady: Bool
+
     var body: some View {
-        MapReader { proxy in
-            MapBase()
+        Group {
+            if isSDKReady {
+                UnlNavigationSdkService.shared.makeSwiftUIMap(
+                    configuration: UnlMapConfiguration(
+                        initialCoordinate: UnlCoordinatesObject(latitude: 52.5200, longitude: 13.4050),
+                        initialZoomLevel: 12
+                    )
+                )
                 .ignoresSafeArea()
+            } else {
+                ProgressView("Starting map...")
+            }
         }
     }
 }
@@ -190,12 +245,13 @@ Paste your Service Key in place of `YOUR_API_TOKEN_HERE`, in between the quotes.
 
 ### Understanding the code
 
-* **`GEMSdkParameters`** — Configuration object for SDK initialization; requires a `GEMSdkExceptions` handler
-* **`activationToken`** — Your ServiceKey for SDK authentication and auto-activation
-* **`initSdk(with:completionHandler:)`** — Initializes the SDK; the completion handler fires when initialization finishes
-* **`MapViewController`** — UIKit view controller that displays the interactive map
-* **`MapBase`** / **`MapReader`** — SwiftUI views for displaying and interacting with the map
-* **`destroy()`** — Frees map resources when the view controller is deallocated
+* **`UnlNavigationSdkService.shared`** — Singleton entry point
+* **`initialize(token:language:)`** — Initializes the UNL SDK before maps
+* **`UnlNavigationSdkDelegate`** — Optional license key callbacks
+* **`makeMapController(configuration:)`** — UIKit map as UnlMapViewController
+* **`makeSwiftUIMap(configuration:)`** — SwiftUI map view
+* **`UnlMapConfiguration`** - Initial center, zoom, and display options
+* **`destroyMap()`** — Frees map resources when the view controller is deallocated
 
 ## Step 4: Run your app[​](#step-4-run-your-app "Direct link to Step 4: Run your app")
 
@@ -205,56 +261,3 @@ Paste your Service Key in place of `YOUR_API_TOKEN_HERE`, in between the quotes.
 > 📝 **INFO**
 >
 > When you initialize the SDK with a valid API key, it also performs an automatic activation. This allows better flexibility for licensing.
-
-## What's next?[​](#whats-next "Direct link to What's next?")
-
-Explore what you can do with the map:
-
-* [Draw shapes](/docs/ios/examples/maps-3dscene/shapes.md) — Add polygons, lines, and circles 
-* [Change map styles](/docs/ios/examples/maps-3dscene/map-style.md) — Switch between light, dark, and custom themes 
-* [Search for places](/docs/ios/examples/places-search.md) — Find addresses and points of interest
-* [Add navigation](/docs/ios/examples/routing-navigation.md) — Calculate routes and get turn-by-turn directions 
-
-
-## Troubleshooting[​](#troubleshooting "Direct link to Troubleshooting")
-
-### SDK initialization returns an error
-
-Check the `SDKErrorCode` returned by `initSdk(with:completionHandler:)`:
-
-* `.kNoError` — Success
-* `.kActivation` — Activation required; verify your API token
-* Other codes — Check your network connection and token validity
-
-### How to check if my Service Key is valid
-
-Add this code to verify your token:
-
-```swift
-GEMSdk.shared().verifySdk(projectApiToken) { status in
-    switch status {
-    case .valid:
-        print("✓ Service key is valid")
-    case .expired:
-        print("✗ Service key expired")
-    case .accessDenied:
-        print("✗ Access denied")
-    default:
-        print("✗ Verification failed: \(status.rawValue)")
-    }
-}
-
-```
-
-### Map shows a watermark
-
-This means your Service key is missing or invalid.
-
-**Without a valid Service key:**
-
-* ❌ Map downloads won't work
-* ❌ Map updates disabled
-* ⚠️ Watermark appears
-* ⚠️ Limited features
-
-**Fix:** Ensure you set a valid `activationToken` on `GEMSdkParameters` before calling `initSdk(with:completionHandler:)`.
