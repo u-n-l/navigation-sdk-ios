@@ -11,37 +11,50 @@ To integrate the UNL Navigation SDK into your iOS application:
 2. **Add the *UnlNavigationSdk* to the project and prepare device builds**
 
 2. **Add the xcframework**
-   * Drag `UnlNavigationSdk-<Environment>.xcframework` into your Xcode project.
+   - Drag `UnlNavigationSdk-<Environment>.xcframework` into your Xcode project.
 
-   * Enable **Copy items if needed** and select your **app target**.
+   - Enable **Copy items if needed** and select your **app target**.
 
-   * Open **General > Frameworks, Libraries, and Embedded Content**.
+   - Open **General > Frameworks, Libraries, and Embedded Content**.
 
-   * Set **Embed and Sign** for the xcframework.
+   - Set **Embed and Sign** for the xcframework.
 
-   * In Swift: `import UnlNavigationSdk`
+   - In Swift: `import UnlNavigationSdk`
 
 3. **Build using `Cmd+B`**
 
    > ⚠️ **WARNING:** If you see **No such module UnlNavigationSdk**, the framework is not linked or not embedded correctly.
 
-4. **Device and Release Builds (Run Script)[](#device-and-release-builds "Device and Release Builds (Run Script)")**
+### **Device and Release Builds (Run Script)[](#device-and-release-builds "Device and Release Builds (Run Script)")**
    > 📝 **NOTE:** If you are testing in the simulator only, this step can be skipped.
 
-   * Select your **app target -> Build Phases**
-   * Click **+ -> New Run Script Phase**
-   * Name the phase **Prepare UNL SDK for Device**
-   * Drag theis phase **below Embed Frameworks** (Order matters)
-   * Uncheck **Based on dependency analysis**
-   * Set **User Script Sandboxing** to **No** in **Build Settings**
-   * Paste this script:
+   - Select your **app target -> Build Phases**
+   - Click **+ -> New Run Script Phase**
+   - Name the phase **Prepare UNL SDK for Device**
+   - Drag theis phase **below Embed Frameworks** (Order matters)
+   - Uncheck **Based on dependency analysis**
+   - Set **User Script Sandboxing** to **No** in **Build Settings**
+   - Paste this script:
+
    ```swift
+
    set -eu
    UNL_XCFRAMEWORK=""
    for candidate in \
-   "${SRCROOT}"/*.xcframework \
-   "${SRCROOT}"/*/*.xcframework \
-   "${SRCROOT}"/*/*/*.xcframework; do
+   "${SRCROOT}"/
+   *.xcframework \
+   "${SRCROOT}"/
+   *
+   /
+   *
+   .xcframework \
+   "${SRCROOT}"/
+   *
+   /
+   *
+   /
+   *
+   .xcframework; do
    [ -e "${candidate}" ] || continue
    case "$(basename "${candidate}")" in
       UnlNavigationSdk*.xcframework | UnlNavigationSdk.xcframework) ;;
@@ -59,12 +72,14 @@ To integrate the UNL Navigation SDK into your iOS application:
    exec "${UNL_XCFRAMEWORK}/unl_embed_fixup"
 
    ```
-   > Do not copy prepare_unl_sdk_for_device.sh or other UNL maintainer scripts into your app. The fixup tool unl_embed_fixup is bundled at the root of the xcframework you receive from UNL.
+   > 📝 **NOTE:** 
    >
-   > Older SDK drops without unl_embed_fixup in the xcframework require an updated xcframework from UNL.
+   > Do not copy `prepare_unl_sdk_for_device.sh` or other UNL maintainer scripts into your app. The fixup tool `unl_embed_fixup` is bundled at the root of the xcframework you receive from UNL.
+   >
+   > Older SDK drops without `unl_embed_fixup` in the xcframework require an updated xcframework from UNL.
 
-5. **Initialize once**
-   - Replace <token> with your actual Service Key.
+### **Initialize once**
+   * Replace "<token>" with your actual Service Key.
 
 ```swift
 let result = await UnlNavigationSdkService.shared.initialize(
@@ -81,8 +96,7 @@ let status = await UnlNavigationSdkService.shared.verify(token: "<token>")
 
 ```
 
-6. **Verify the build log**
-
+### **Verify the build log**
    * After an iphoneos build or archive, search the log for:
 
 > `Preparing UnlNavigationSdk for device...` 
@@ -91,27 +105,33 @@ let status = await UnlNavigationSdkService.shared.verify(token: "<token>")
 >
 > `UnlNavigationSdk device preparation complete.`
 
+<br/>
+
 > 🚨 **DANGER:** 
 >
 > If the first and last lines are missing, the script did not run (wrong phase order, sandboxing is still enabled, or xcframework path not found).
 
-7. **Verify the app bundle**
+### **Verify the app bundle**
 
    * In the built **.app -> Frameworks:** 
       - `UnlNavigationSdk.framework`
       - `UnlMapEngine.framework` (Private map engine runtime, prepared by `unl_embed_fixup`)
+
 > 📝 **NOTE:** 
 >
 > There **should not** be any nested `UnlNavigationSdk.framework/Frameworks` folder in the final app.
 
 ### Why this step is required
+
 > `UnlNavigationSdk` ships with a **private bundled runtime** inside the framework. With **Embed and Sign**, Xcode signs the outer framework but on device often does not correctly re-sign the nested runtime. iOS may then refuse to load the SDK.
 >
 > The `unl_embed_fixup` tool runs after embedding and:
 1. Moves the private runtime to the correct location in your app bundle.
 2. Updates load paths inside UnlNavigationSdk.
 3. Re-signs components with your app signing identity.
->
+
+<br/>
+
 > 📝 **NOTE:** 
 >
 > Link only `UnlNavigationSdk.xcframework`. **Do not** add any other map or navigation xcframework to your app target.
