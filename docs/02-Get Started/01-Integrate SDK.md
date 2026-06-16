@@ -37,29 +37,41 @@ To integrate the UNL Navigation SDK into your iOS application:
    - Paste this script:
 
    ```swift
-set -eu
-UNL_XCFRAMEWORK=""
 
-for candidate in "${SRCROOT}"/*.xcframework "${SRCROOT}"/*/*.xcframework "${SRCROOT}"/*/*/*.xcframework; do
-    [ -e "${candidate}" ] || continue
-    case "$(basename "${candidate}")" in
-       UnlNavigationSdk*.xcframework | UnlNavigationSdk.xcframework) ;;
-       *) continue ;;
-    esac
-    if [ -x "${candidate}/unl_embed_fixup" ]; then
-       UNL_XCFRAMEWORK="${candidate}"
-       break
-    fi
-done
+   set -eu
+   UNL_XCFRAMEWORK=""
+   for candidate in \
+   "${SRCROOT}"/
+   *.xcframework \
+   "${SRCROOT}"/
+   *
+   /
+   *
+   .xcframework \
+   "${SRCROOT}"/
+   *
+   /
+   *
+   /
+   *
+   .xcframework; do
+   [ -e "${candidate}" ] || continue
+   case "$(basename "${candidate}")" in
+      UnlNavigationSdk*.xcframework | UnlNavigationSdk.xcframework) ;;
+      *) continue ;;
+   esac
+   if [ -x "${candidate}/unl_embed_fixup" ]; then
+      UNL_XCFRAMEWORK="${candidate}"
+      break
+   fi
+   done
+   if [ -z "${UNL_XCFRAMEWORK}" ]; then
+   echo "error: UnlNavigationSdk xcframework with unl_embed_fixup not found under ${SRCROOT}" >&2
+   exit 1
+   fi
+   exec "${UNL_XCFRAMEWORK}/unl_embed_fixup"
 
-if [ -z "${UNL_XCFRAMEWORK}" ]; then
-    echo "error: UnlNavigationSdk xcframework with unl_embed_fixup not found under ${SRCROOT}" >&2
-    exit 1
-fi
-
-exec "${UNL_XCFRAMEWORK}/unl_embed_fixup"
-```
-
+   ```
    > 📝 **NOTE:** 
    >
    > Do not copy `prepare_unl_sdk_for_device.sh` or other UNL maintainer scripts into your app. The fixup tool `unl_embed_fixup` is bundled at the root of the xcframework you receive from UNL.
