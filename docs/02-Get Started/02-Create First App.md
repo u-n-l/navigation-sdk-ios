@@ -2,19 +2,11 @@
 
 Follow this tutorial to build an iOS app with an interactive map.
 
-> 📝 **INFO** What you need
+> 📝 **INFO:** What you need
 >
 >* Xcode installed
 >* iOS 17.0 or higher
 >* Service key from UNL - via UNL Platform
-
-> 📝 **INFO** Simulator vs Physical device
->* **Simulator** - Usually works with Embed and Sign only
->* **Physical iPhone / TestFlight / App Store** - Complete Step 2b below {TODO - add link}.
->
-> ⚠️ **WARNING**
->
-> Do not copy separate shell scripts into your app repo.
 
 ## Step 1: Create a new project[​](#step-1-create-a-new-project "Direct link to Step 1: Create a new project")
 
