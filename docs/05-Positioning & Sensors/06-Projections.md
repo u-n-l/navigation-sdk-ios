@@ -10,7 +10,7 @@ Learn how to create projection objects and convert between coordinate systems us
 * `LAM` - Lambert
 * `BNG` - British National Grid
 * `MGRS` - Military Grid Reference System
-* `W3W` - What three words
+
 
 ## WGS84 projection[​](#wgs84-projection "Direct link to WGS84 projection")
 
@@ -123,27 +123,6 @@ mgrs.setEasting(1, northing: 1, zone: "B", letters: "AB")
 
 ```
 
-## W3W projection[​](#w3w-projection "Direct link to W3W projection")
-
-The **W3W** (What three words) projection is a geocoding system that divides the world into a grid of 3m x 3m squares, each identified by a unique combination of three words.
-
-Create a `W3W` projection with an API token:
-
-```swift
-let w3w = ProjectionW3WObject(token: "your-api-token")
-
-```
-
-Access and modify token and words:
-
-```swift
-let token = w3w.getToken()
-let words = w3w.getWords()
-
-w3w.setToken("new-token")
-w3w.setWords("///hello.world.test")
-
-```
 
 ## LAM projection[​](#lam-projection "Direct link to LAM projection")
 
